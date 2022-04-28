@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Users SP</string>
+    <string name="description_user_photo">Image of the user</string>
+    <string name="sp_first_time">first time</string>
+    <string name="dialog_title">User register</string>
+    <string name="dialog_confirm">Register</string>
+    <string name="helper_username">Required</string>
+    <string name="hint_username">User\'s name</string>
+    <string name="sp_username">username</string>
+    <string name="register_success">User register success</string>
+    <string name="dialog_invite_user">Guest</string>
+</resources>
