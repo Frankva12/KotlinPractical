@@ -18,6 +18,7 @@ import com.franciscostanleyvasconceloszelaya.snapshots.databinding.ItemSnapshotB
 import com.google.firebase.database.FirebaseDatabase
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.SnapshotParser
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
@@ -39,11 +40,11 @@ class HomeFragment : Fragment() {
         val query = FirebaseDatabase.getInstance().reference.child("snapshots")
 
         val options =
-            FirebaseRecyclerOptions.Builder<Snapshot>().setQuery(query, SnapshotParser {
+            FirebaseRecyclerOptions.Builder<Snapshot>().setQuery(query) {
                 val snapshot = it.getValue(Snapshot::class.java)
                 snapshot!!.id = it.key
                 snapshot
-            }).build()
+            }.build()
 
         mFireBaseAdapter = object : FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>(options) {
             private lateinit var mContext: Context
@@ -106,7 +107,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setLike(snapshot: Snapshot, checked: Boolean) {
-
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
+        if (checked) {
+            snapshot.id?.let {
+                databaseReference.child(it).child("likeList")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
+            }
+        }else{
+            snapshot.id?.let {
+                databaseReference.child(it).child("likeList")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
+            }
+        }
     }
 
     inner class SnapshotHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -114,6 +126,9 @@ class HomeFragment : Fragment() {
 
         fun setListener(snapshot: Snapshot) {
             binding.btnDelete.setOnClickListener { deleteSnapshot(snapshot) }
+            binding.cbLike.setOnCheckedChangeListener { compoundButton, checked ->
+                setLike(snapshot, checked)
+            }
         }
     }
 }
