@@ -17,6 +17,7 @@ import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentHomeB
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.ItemSnapshotBinding
 import com.google.firebase.database.FirebaseDatabase
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.firebase.ui.database.SnapshotParser
 
 class HomeFragment : Fragment() {
 
@@ -38,8 +39,11 @@ class HomeFragment : Fragment() {
         val query = FirebaseDatabase.getInstance().reference.child("snapshots")
 
         val options =
-            FirebaseRecyclerOptions.Builder<Snapshot>().setQuery(query, Snapshot::class.java)
-                .build()
+            FirebaseRecyclerOptions.Builder<Snapshot>().setQuery(query, SnapshotParser {
+                val snapshot = it.getValue(Snapshot::class.java)
+                snapshot!!.id = it.key
+                snapshot
+            }).build()
 
         mFireBaseAdapter = object : FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>(options) {
             private lateinit var mContext: Context
@@ -96,11 +100,20 @@ class HomeFragment : Fragment() {
         mFireBaseAdapter.stopListening()
     }
 
+    internal fun deleteSnapshot(snapshot: Snapshot) {
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
+        snapshot.id?.let { databaseReference.child(it).removeValue() }
+    }
+
+    private fun setLike(snapshot: Snapshot, checked: Boolean) {
+
+    }
+
     inner class SnapshotHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemSnapshotBinding.bind(view)
 
         fun setListener(snapshot: Snapshot) {
-
+            binding.btnDelete.setOnClickListener { deleteSnapshot(snapshot) }
         }
     }
 }
