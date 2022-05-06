@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.snapshots
+package com.franciscostanleyvasconceloszelaya.snapshots.ui.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -17,10 +17,12 @@ import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentHomeB
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.ItemSnapshotBinding
 import com.google.firebase.database.FirebaseDatabase
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.franciscostanleyvasconceloszelaya.snapshots.R
+import com.franciscostanleyvasconceloszelaya.snapshots.entities.Snapshot
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeFragment : Fragment(), HomeAux {
+class HomeFragment : Fragment() {
 
     private lateinit var mBinding: FragmentHomeBinding
     private lateinit var mFireBaseAdapter: FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>
@@ -106,7 +108,7 @@ class HomeFragment : Fragment(), HomeAux {
         mFireBaseAdapter.stopListening()
     }
 
-    override fun goToTop() {
+    fun goToTop() {
         mBinding.recyclerView.smoothScrollToPosition(0)
     }
 

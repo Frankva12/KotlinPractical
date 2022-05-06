@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.snapshots
+package com.franciscostanleyvasconceloszelaya.snapshots.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
+import com.franciscostanleyvasconceloszelaya.snapshots.R
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 

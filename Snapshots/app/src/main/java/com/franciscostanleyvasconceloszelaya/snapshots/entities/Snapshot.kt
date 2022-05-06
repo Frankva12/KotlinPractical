@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.snapshots
+package com.franciscostanleyvasconceloszelaya.snapshots.entities
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties

@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.ActivityMainBinding
+import com.franciscostanleyvasconceloszelaya.snapshots.ui.fragments.AddFragment
+import com.franciscostanleyvasconceloszelaya.snapshots.ui.fragments.HomeFragment
+import com.franciscostanleyvasconceloszelaya.snapshots.ui.fragments.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -105,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         }
         mBinding.bottomNav.setOnItemReselectedListener {
             when (it.itemId) {
-                R.id.action_home -> (homeFragment as HomeAux).goToTop()
+                R.id.action_home -> (homeFragment).goToTop()
             }
         }
     }
