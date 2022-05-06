@@ -62,6 +62,11 @@ class HomeFragment : Fragment() {
                     setListener(snapshot)
 
                     binding.tvTitle.text = snapshot.title
+                    binding.cbLike.text = snapshot.likeList?.keys?.size.toString()
+                    FirebaseAuth.getInstance().currentUser?.let {
+                        binding.cbLike.isChecked =
+                            snapshot.likeList!!.containsKey(it.uid)
+                    }
                     Glide.with(mContext)
                         .load(snapshot.photoUrl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -113,7 +118,7 @@ class HomeFragment : Fragment() {
                 databaseReference.child(it).child("likeList")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
             }
-        }else{
+        } else {
             snapshot.id?.let {
                 databaseReference.child(it).child("likeList")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
