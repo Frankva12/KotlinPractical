@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeAux {
 
     private lateinit var mBinding: FragmentHomeBinding
     private lateinit var mFireBaseAdapter: FirebaseRecyclerAdapter<Snapshot, SnapshotHolder>
@@ -106,6 +106,10 @@ class HomeFragment : Fragment() {
         mFireBaseAdapter.stopListening()
     }
 
+    override fun goToTop() {
+        mBinding.recyclerView.smoothScrollToPosition(0)
+    }
+
     internal fun deleteSnapshot(snapshot: Snapshot) {
         val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
         snapshot.id?.let { databaseReference.child(it).removeValue() }
@@ -136,4 +140,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 }
