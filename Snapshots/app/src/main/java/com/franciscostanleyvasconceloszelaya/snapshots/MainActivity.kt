@@ -1,9 +1,9 @@
 package com.franciscostanleyvasconceloszelaya.snapshots
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.firebase.ui.auth.AuthUI
@@ -13,8 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
-    private val RC_SIGN_IN = 21
-
     private lateinit var mBinding: ActivityMainBinding
 
     private lateinit var mActiveFragment: Fragment
@@ -22,6 +20,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
     private var mFirebaseAuth: FirebaseAuth? = null
+
+    private val authResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == RESULT_OK) {
+            Toast.makeText(this, getString(R.string.sign_up_welcome), Toast.LENGTH_SHORT).show()
+        } else {
+            if (IdpResponse.fromResultIntent(it.data) == null) {
+                finish()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,18 +44,17 @@ class MainActivity : AppCompatActivity() {
         mFirebaseAuth = FirebaseAuth.getInstance()
         mAuthListener = FirebaseAuth.AuthStateListener {
 
-            val user = it.currentUser
-            if (user == null) {
-                startActivityForResult(
-                    AuthUI.getInstance().createSignInIntentBuilder()
-                        .setAvailableProviders(
-                        listOf(
-                            AuthUI.IdpConfig.EmailBuilder().build(),
-                            AuthUI.IdpConfig.GoogleBuilder().build()
-                        )
-                    ).build(), RC_SIGN_IN
-                )
-            }
+           if (it.currentUser == null){
+               authResult.launch(
+                   AuthUI.getInstance().createSignInIntentBuilder()
+                       .setAvailableProviders(
+                           listOf(
+                               AuthUI.IdpConfig.EmailBuilder().build(),
+                               AuthUI.IdpConfig.GoogleBuilder().build()
+                           )
+                       ).build()
+               )
+           }
         }
     }
 
@@ -60,19 +67,16 @@ class MainActivity : AppCompatActivity() {
 
         mActiveFragment = homeFragment
 
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, profileFragment, ProfileFragment::class.java.name)
-            .hide(profileFragment)
-            .commit()
+        with(mFragmentManager.beginTransaction()) {
+            add(R.id.hostFragment, profileFragment, ProfileFragment::class.java.name)
+            hide(profileFragment)
 
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, addFragment, ProfileFragment::class.java.name)
-            .hide(addFragment)
-            .commit()
+            add(R.id.hostFragment, addFragment, ProfileFragment::class.java.name)
+            hide(addFragment)
 
-        mFragmentManager.beginTransaction()
-            .add(R.id.hostFragment, homeFragment, homeFragment::class.java.name)
-            .commit()
+            add(R.id.hostFragment, homeFragment, homeFragment::class.java.name)
+            commit()
+        }
 
         mBinding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -99,8 +103,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        mBinding.bottomNav.setOnNavigationItemReselectedListener{
-            when(it.itemId){
+        mBinding.bottomNav.setOnItemReselectedListener {
+            when (it.itemId) {
                 R.id.action_home -> (homeFragment as HomeAux).goToTop()
             }
         }
@@ -114,18 +118,5 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         mFirebaseAuth?.removeAuthStateListener(mAuthListener)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
-            if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Welcome...", Toast.LENGTH_SHORT).show()
-            } else {
-                if (IdpResponse.fromResultIntent(data) == null){
-                    finish()
-                }
-            }
-        }
     }
 }

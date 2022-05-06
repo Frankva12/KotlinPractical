@@ -17,7 +17,7 @@ import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentHomeB
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.ItemSnapshotBinding
 import com.google.firebase.database.FirebaseDatabase
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.firebase.ui.database.SnapshotParser
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment(), HomeAux {
@@ -50,9 +50,9 @@ class HomeFragment : Fragment(), HomeAux {
             private lateinit var mContext: Context
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnapshotHolder {
                 mContext = parent.context
-                val view = LayoutInflater.from(mContext)
+                val viewLayout = LayoutInflater.from(mContext)
                     .inflate(R.layout.item_snapshot, parent, false)
-                return SnapshotHolder(view)
+                return SnapshotHolder(viewLayout)
             }
 
             override fun onBindViewHolder(holder: SnapshotHolder, position: Int, model: Snapshot) {
@@ -111,11 +111,17 @@ class HomeFragment : Fragment(), HomeAux {
     }
 
     internal fun deleteSnapshot(snapshot: Snapshot) {
-        val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
-        snapshot.id?.let { databaseReference.child(it).removeValue() }
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.dialog_delete_title)
+            .setPositiveButton(R.string.dialog_delete_confirm) { _, _ ->
+                val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
+                snapshot.id?.let { databaseReference.child(it).removeValue() }
+            }
+            .setNegativeButton(R.string.dialog_delete_cancel, null)
+            .show()
     }
 
-    private fun setLike(snapshot: Snapshot, checked: Boolean) {
+    internal fun setLike(snapshot: Snapshot, checked: Boolean) {
         val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
         if (checked) {
             snapshot.id?.let {
@@ -135,7 +141,7 @@ class HomeFragment : Fragment(), HomeAux {
 
         fun setListener(snapshot: Snapshot) {
             binding.btnDelete.setOnClickListener { deleteSnapshot(snapshot) }
-            binding.cbLike.setOnCheckedChangeListener { compoundButton, checked ->
+            binding.cbLike.setOnCheckedChangeListener { _, checked ->
                 setLike(snapshot, checked)
             }
         }

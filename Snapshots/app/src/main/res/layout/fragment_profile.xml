@@ -10,7 +10,7 @@
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log out"
+        android:text="@string/log_out_button"
         app:icon="@drawable/ic_exit_to_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="complete name" />
+        tools:text="complete name"
+        tools:ignore="SelectableText" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -36,5 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvName"
-        tools:text="email@domain.com" />
+        tools:text="email@domain.com"
+        tools:ignore="SelectableText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

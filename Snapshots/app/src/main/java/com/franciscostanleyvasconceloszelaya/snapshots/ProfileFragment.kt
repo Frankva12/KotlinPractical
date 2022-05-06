@@ -17,7 +17,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = FragmentProfileBinding.inflate(inflater, container, false)
         return mBinding.root
     }
@@ -34,7 +34,7 @@ class ProfileFragment : Fragment() {
         context?.let {
             AuthUI.getInstance().signOut(it)
                 .addOnCompleteListener {
-                    Toast.makeText(context, "See you soon...", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.log_out_message), Toast.LENGTH_SHORT).show()
                 }
         }
     }
