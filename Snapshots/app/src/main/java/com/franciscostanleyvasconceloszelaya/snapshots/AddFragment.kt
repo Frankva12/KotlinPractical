@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentAddBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
@@ -67,7 +68,7 @@ class AddFragment : Fragment() {
                     mBinding.progressBar.visibility = View.INVISIBLE
                 }
                 .addOnSuccessListener {
-                    Snackbar.make(mBinding.root, "Posted Snapshot", Snackbar.LENGTH_SHORT)
+                    Toast.makeText(context, "Posted Snapshot", Toast.LENGTH_SHORT)
                         .show()
                     it.storage.downloadUrl.addOnSuccessListener {
                         saveSnapshot(key, it.toString(), mBinding.etTitle.text.toString().trim())
@@ -76,11 +77,7 @@ class AddFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener {
-                    Snackbar.make(
-                        mBinding.root,
-                        "Can't upload, try again later",
-                        Snackbar.LENGTH_SHORT
-                    )
+                    Toast.makeText(context, "Can't upload, try again later", Toast.LENGTH_SHORT)
                         .show()
                 }
         }

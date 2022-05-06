@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             val user = it.currentUser
             if (user == null) {
                 startActivityForResult(
-                    AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(
+                    AuthUI.getInstance().createSignInIntentBuilder()
+                        .setAvailableProviders(
                         listOf(
                             AuthUI.IdpConfig.EmailBuilder().build(),
                             AuthUI.IdpConfig.GoogleBuilder().build()
