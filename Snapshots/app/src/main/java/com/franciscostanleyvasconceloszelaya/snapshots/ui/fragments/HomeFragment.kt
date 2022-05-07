@@ -22,6 +22,7 @@ import com.franciscostanleyvasconceloszelaya.snapshots.entities.Snapshot
 import com.franciscostanleyvasconceloszelaya.snapshots.utils.FragmentAux
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.FirebaseStorage
@@ -50,6 +51,10 @@ class HomeFragment : Fragment(), FragmentAux {
         setUpRecyclerView()
     }
 
+    private fun setUpFireBase() {
+        mSnapshotsRef =
+            FirebaseDatabase.getInstance().reference.child(SnapshotsApplication.PATH_SNAPSHOTS)
+    }
 
     private fun setUpAdapter() {
         val query = mSnapshotsRef
@@ -104,10 +109,6 @@ class HomeFragment : Fragment(), FragmentAux {
         }
     }
 
-    private fun setUpFireBase() {
-        mSnapshotsRef =
-            FirebaseDatabase.getInstance().reference.child(SnapshotsApplication.PATH_SNAPSHOTS)
-    }
 
     private fun setUpRecyclerView() {
         mLayoutManager = LinearLayoutManager(context)
@@ -130,7 +131,7 @@ class HomeFragment : Fragment(), FragmentAux {
         mFireBaseAdapter.stopListening()
     }
 
-    private fun deleteSnapshot(snapshot: Snapshot) {
+    internal fun deleteSnapshot(snapshot: Snapshot) {
         context?.let {
             MaterialAlertDialogBuilder(it)
                 .setTitle(R.string.dialog_delete_title)
@@ -155,7 +156,7 @@ class HomeFragment : Fragment(), FragmentAux {
         }
     }
 
-    private fun setLike(snapshot: Snapshot, checked: Boolean) {
+    internal fun setLike(snapshot: Snapshot, checked: Boolean) {
         val myUserRef = mSnapshotsRef.child(snapshot.id)
             .child(SnapshotsApplication.PROPERTY_LIKE_LIST)
             .child(SnapshotsApplication.currentUser.uid)
@@ -173,10 +174,10 @@ class HomeFragment : Fragment(), FragmentAux {
     inner class SnapshotHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemSnapshotBinding.bind(view)
 
-        @SuppressLint("SyntheticAccessor")
         fun setListener(snapshot: Snapshot) {
             with(binding) {
                 btnDelete.setOnClickListener { deleteSnapshot(snapshot) }
+
                 cbLike.setOnCheckedChangeListener { _, checked ->
                     setLike(snapshot, checked)
                 }
