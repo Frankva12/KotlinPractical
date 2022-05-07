@@ -157,13 +157,17 @@ class HomeFragment : Fragment(), FragmentAux {
     }
 
     internal fun setLike(snapshot: Snapshot, checked: Boolean) {
-        val myUserRef = mSnapshotsRef.child(snapshot.id)
-            .child(SnapshotsApplication.PROPERTY_LIKE_LIST)
-            .child(SnapshotsApplication.currentUser.uid)
+        val databaseReference = FirebaseDatabase.getInstance().reference.child("snapshots")
         if (checked) {
-            myUserRef.setValue(checked)
+            snapshot.id.let {
+                databaseReference.child(it).child("likeList")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(checked)
+            }
         } else {
-            myUserRef.setValue(null)
+            snapshot.id.let {
+                databaseReference.child(it).child("likeList")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).setValue(null)
+            }
         }
     }
 
