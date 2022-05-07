@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.franciscostanleyvasconceloszelaya.snapshots.R
+import com.franciscostanleyvasconceloszelaya.snapshots.SnapshotsApplication
 import com.franciscostanleyvasconceloszelaya.snapshots.databinding.FragmentProfileBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.franciscostanleyvasconceloszelaya.snapshots.utils.FragmentAux
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), FragmentAux {
 
     private lateinit var mBinding: FragmentProfileBinding
 
@@ -25,18 +28,44 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding.tvName.text = FirebaseAuth.getInstance().currentUser?.displayName
-        mBinding.tvEmail.text = FirebaseAuth.getInstance().currentUser?.email
 
-        mBinding.btnLogout.setOnClickListener { signOut() }
+        refresh()
+        setUpButtom()
+    }
+
+    private fun setUpButtom() {
+        mBinding.btnLogout.setOnClickListener {
+            context?.let {
+                MaterialAlertDialogBuilder(it)
+                    .setTitle(R.string.dialog_logout_title)
+                    .setPositiveButton(R.string.dialog_logout_confirm) { _, _ ->
+                        signOut()
+                    }
+                    .setNegativeButton(R.string.dialog_logout_cancel, null)
+                    .show()
+            }
+        }
     }
 
     private fun signOut() {
         context?.let {
             AuthUI.getInstance().signOut(it)
                 .addOnCompleteListener {
-                    Toast.makeText(context, getString(R.string.log_out_message), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.log_out_message), Toast.LENGTH_SHORT)
+                        .show()
+                    mBinding.tvName.text = ""
+                    mBinding.tvEmail.text = ""
+
+                    (activity?.findViewById(R.id.bottomNav) as? BottomNavigationView)?.selectedItemId =
+                        R.id.action_home
                 }
+        }
+    }
+
+    override fun refresh() {
+        with(mBinding) {
+            tvName.text = SnapshotsApplication.currentUser.displayName
+            tvEmail.text = SnapshotsApplication.currentUser.email
         }
     }
 }
