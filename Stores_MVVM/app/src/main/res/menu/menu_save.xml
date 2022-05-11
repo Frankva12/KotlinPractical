@@ -7,5 +7,4 @@
         android:title="@string/menu_save"
         android:icon="@drawable/ic_check"
         app:showAsAction="ifRoom"/>
-
 </menu>
