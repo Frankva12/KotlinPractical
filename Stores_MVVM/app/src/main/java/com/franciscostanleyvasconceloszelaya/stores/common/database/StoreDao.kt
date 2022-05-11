@@ -1,6 +1,7 @@
-package com.franciscostanleyvasconceloszelaya.stores
+package com.franciscostanleyvasconceloszelaya.stores.common.database
 
 import androidx.room.*
+import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 
 @Dao
 interface StoreDao {

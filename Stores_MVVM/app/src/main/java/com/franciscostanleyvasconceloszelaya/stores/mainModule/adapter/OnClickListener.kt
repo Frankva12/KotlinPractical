@@ -1,4 +1,6 @@
-package com.franciscostanleyvasconceloszelaya.stores
+package com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter
+
+import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 
 interface OnClickListener {
     fun onClick(storeId: Long)

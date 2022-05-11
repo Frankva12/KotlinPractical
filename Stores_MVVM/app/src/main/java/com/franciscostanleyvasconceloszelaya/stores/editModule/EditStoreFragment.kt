@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.stores
+package com.franciscostanleyvasconceloszelaya.stores.editModule
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.franciscostanleyvasconceloszelaya.stores.R
+import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
+import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.databinding.FragmentEditStoreBinding
+import com.franciscostanleyvasconceloszelaya.stores.mainModule.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import org.jetbrains.anko.doAsync

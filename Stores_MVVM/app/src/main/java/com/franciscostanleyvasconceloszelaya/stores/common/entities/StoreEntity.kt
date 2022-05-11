@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.stores
+package com.franciscostanleyvasconceloszelaya.stores.common.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
