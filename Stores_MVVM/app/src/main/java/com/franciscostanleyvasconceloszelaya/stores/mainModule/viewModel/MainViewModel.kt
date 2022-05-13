@@ -20,11 +20,14 @@ class MainViewModel : ViewModel() {
         return stores
     }
 
-    private fun loadStores(){
-        interact.getStoresCallback(object : MainInteractor.StoresCallBack{
-            override fun getStoresCallback(callback: MutableList<StoreEntity>) {
-                stores.value = callback
-            }
-        })
+    private fun loadStores() {
+//        interact.getStoresCallback(object : MainInteractor.StoresCallBack {
+//            override fun getStoresCallback(callback: MutableList<StoreEntity>) {
+//                stores.value = callback
+//            }
+//        })
+        interact.getStores {
+            stores.value = it
+        }
     }
 }
