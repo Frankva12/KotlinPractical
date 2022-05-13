@@ -52,9 +52,21 @@ class StoreAdapter(
     }
 
     fun add(storeEntity: StoreEntity) {
-        if (!stores.contains(storeEntity)) {
-            stores.add(storeEntity)
-            notifyItemInserted(stores.size - 1)
+        if (storeEntity.id != 0L) {
+            if (!stores.contains(storeEntity)) {
+                stores.add(storeEntity)
+                notifyItemInserted(stores.size - 1)
+            } else {
+                update(storeEntity)
+            }
+        }
+    }
+
+    private fun update(storeEntity: StoreEntity) {
+        val index = stores.indexOf(storeEntity)
+        if (index != -1) {
+            stores[index] = storeEntity
+            notifyItemChanged(index)
         }
     }
 

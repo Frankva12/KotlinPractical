@@ -53,7 +53,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             else
                 mBinding.fab.hide()
         }
-
+        mEditStoreViewModel.getStoreSelected().observe(this) { storeEntity ->
+            mAdapter.add(storeEntity)
+        }
     }
 
     private fun launchEditFragment(storeEntity: StoreEntity = StoreEntity()) {
@@ -84,8 +86,6 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     * OnClickListener
     * */
     override fun onClick(storeEntity: StoreEntity) {
-        val args = Bundle()
-
         launchEditFragment(storeEntity)
     }
 
