@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.franciscostanleyvasconceloszelaya.stores.*
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.MainAux
@@ -14,6 +15,7 @@ import com.franciscostanleyvasconceloszelaya.stores.databinding.ActivityMainBind
 import com.franciscostanleyvasconceloszelaya.stores.editModule.EditStoreFragment
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.OnClickListener
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreAdapter
+import com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -23,6 +25,9 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: StoreAdapter
     private lateinit var mGridLayout: GridLayoutManager
+
+    //MVVM
+    private lateinit var mMainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +47,14 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         mBinding.fab.setOnClickListener { launchEditFragment() }
 
         setUpRecyclerView()
+        setUpViewModel()
+    }
+
+    private fun setUpViewModel() {
+        mMainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mMainViewModel.getStores().observe(this) { stores ->
+            mAdapter.setStores(stores)
+        }
     }
 
     private fun launchEditFragment(args: Bundle? = null) {
@@ -63,7 +76,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     private fun setUpRecyclerView() {
         mAdapter = StoreAdapter(mutableListOf(), this)
         mGridLayout = GridLayoutManager(this, resources.getInteger(R.integer.main_columns))
-        getStores()
 
         mBinding.recyclerView.apply {
             setHasFixedSize(true)
@@ -72,14 +84,14 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         }
     }
 
-    private fun getStores() {
-        doAsync {
-            val stores = StoreApplication.database.storeDao().getAllStores()
-            uiThread {
-                mAdapter.setStores(stores)
-            }
-        }
-    }
+//    private fun getStores() {
+//        doAsync {
+//            val stores = StoreApplication.database.storeDao().getAllStores()
+//            uiThread {
+//                mAdapter.setStores(stores)
+//            }
+//        }
+//    }
 
     /*
     * OnClickListener
