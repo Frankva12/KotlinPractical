@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "StoreEntity")
 data class StoreEntity(
-    @PrimaryKey (autoGenerate = true) var id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     var name: String,
     var phone: String,
     var website: String = "",
@@ -14,6 +14,8 @@ data class StoreEntity(
 
 
 ) {
+    constructor() : this(name = "", phone = "", website = "", photoUrl = "")
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
