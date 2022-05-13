@@ -8,12 +8,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.franciscostanleyvasconceloszelaya.stores.R
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.databinding.FragmentEditStoreBinding
+import com.franciscostanleyvasconceloszelaya.stores.editModule.viewModel.EditStoreViewModel
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -23,9 +26,20 @@ import org.jetbrains.anko.uiThread
 class EditStoreFragment : Fragment() {
 
     private lateinit var mBinding: FragmentEditStoreBinding
+
+    //MVVM
+    private lateinit var mEditStoreViewModel: EditStoreViewModel
+
     private var mActivity: MainActivity? = null
     private var mIsEditMode: Boolean = false
     private var mStoreEntity: StoreEntity? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mEditStoreViewModel =
+            ViewModelProvider(requireActivity()).get(EditStoreViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +67,15 @@ class EditStoreFragment : Fragment() {
             )
         }
 
+        //MVVM
+        setUpViewModel()
+
         setUpActionBar()
         setUpTextFields()
+    }
+
+    private fun setUpViewModel() {
+
     }
 
     private fun setUpActionBar() {
@@ -144,7 +165,8 @@ class EditStoreFragment : Fragment() {
                         uiThread {
                             hideKeyBoard()
                             if (mIsEditMode) {
-                                mActivity?.updateStore(mStoreEntity!!)
+                                // FIXME: 13/5/2022 viewModel
+                                //mActivity?.updateStore(mStoreEntity!!)
 
                                 Snackbar.make(
                                     mBinding.root,
@@ -152,7 +174,8 @@ class EditStoreFragment : Fragment() {
                                     Snackbar.LENGTH_SHORT
                                 ).show()
                             } else {
-                                mActivity?.addStore(mStoreEntity!!)
+                                // FIXME: 13/5/2022 viewModel
+                                //mActivity?.addStore(mStoreEntity!!)
 
                                 Toast.makeText(
                                     mActivity,
@@ -202,7 +225,7 @@ class EditStoreFragment : Fragment() {
     override fun onDestroy() {
         mActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         mActivity?.supportActionBar?.title = getString(R.string.app_name)
-        mActivity?.hideFab(true)
+        mEditStoreViewModel.setShowFab(true)
 
         setHasOptionsMenu(false)
         super.onDestroy()

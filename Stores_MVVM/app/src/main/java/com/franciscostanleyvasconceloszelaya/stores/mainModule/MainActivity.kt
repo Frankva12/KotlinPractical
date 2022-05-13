@@ -9,16 +9,16 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.franciscostanleyvasconceloszelaya.stores.*
-import com.franciscostanleyvasconceloszelaya.stores.common.utils.MainAux
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.databinding.ActivityMainBinding
 import com.franciscostanleyvasconceloszelaya.stores.editModule.EditStoreFragment
+import com.franciscostanleyvasconceloszelaya.stores.editModule.viewModel.EditStoreViewModel
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.OnClickListener
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreAdapter
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
+class MainActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var mBinding: ActivityMainBinding
     private lateinit var mAdapter: StoreAdapter
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
 
     //MVVM
     private lateinit var mMainViewModel: MainViewModel
+    private lateinit var mEditStoreViewModel: EditStoreViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +44,20 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         mMainViewModel.getStores().observe(this) { stores ->
             mAdapter.setStores(stores)
         }
+
+
+        mEditStoreViewModel = ViewModelProvider(this)[EditStoreViewModel::class.java]
+        mEditStoreViewModel.getShowFab().observe(this) { isVisible ->
+            if (isVisible)
+                mBinding.fab.show()
+            else
+                mBinding.fab.hide()
+        }
+
     }
 
     private fun launchEditFragment(args: Bundle? = null) {
+        mEditStoreViewModel.setShowFab(false)
         val fragment = EditStoreFragment()
 
         if (args != null) fragment.arguments = args
@@ -57,8 +69,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         fragmentTransaction.add(R.id.containerMain, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
-        hideFab()
     }
 
     private fun setUpRecyclerView() {
@@ -137,23 +147,5 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
             Toast.makeText(this, R.string.main_error_no_resolve, Toast.LENGTH_LONG).show()
     }
 
-    /*
-    * MainAux
-    * */
-
-    override fun hideFab(isVisible: Boolean) {
-        if (isVisible)
-            mBinding.fab.show()
-        else
-            mBinding.fab.hide()
-    }
-
-    override fun addStore(storeEntity: StoreEntity) {
-        mAdapter.add(storeEntity)
-    }
-
-    override fun updateStore(storeEntity: StoreEntity) {
-        TODO("Not yet implemented")
-    }
 
 }
