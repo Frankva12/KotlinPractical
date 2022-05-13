@@ -5,7 +5,7 @@ import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainInteractor {
+class MainInteract {
 
 //    interface StoresCallBack{
 //        fun getStoresCallback(callback: MutableList<StoreEntity>)

@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
-import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteractor
+import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteract
 
 class MainViewModel : ViewModel() {
-    private val interact: MainInteractor = MainInteractor()
+    private val interact: MainInteract = MainInteract()
 
     private val stores: MutableLiveData<List<StoreEntity>> by lazy {
         MutableLiveData<List<StoreEntity>>().also {
