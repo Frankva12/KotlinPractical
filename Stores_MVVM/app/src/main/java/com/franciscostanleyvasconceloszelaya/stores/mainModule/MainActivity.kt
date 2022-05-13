@@ -17,8 +17,6 @@ import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.OnClickLi
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreAdapter
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
 
@@ -33,16 +31,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
-//        mBinding.btnSave.setOnClickListener {
-//            val store = StoreEntity(name = mBinding.etName.text.toString().trim())
-//
-//            Thread {
-//                StoreApplication.database.storeDao().addStore(store)
-//            }.start()
-//            mAdapter.add(store)
-//            mBinding.etName.text.clear()
-//        }
 
         mBinding.fab.setOnClickListener { launchEditFragment() }
 
@@ -84,15 +72,6 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         }
     }
 
-//    private fun getStores() {
-//        doAsync {
-//            val stores = StoreApplication.database.storeDao().getAllStores()
-//            uiThread {
-//                mAdapter.setStores(stores)
-//            }
-//        }
-//    }
-
     /*
     * OnClickListener
     * */
@@ -104,13 +83,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     }
 
     override fun onFavoriteStore(storeEntity: StoreEntity) {
-        storeEntity.isFavorite = !storeEntity.isFavorite
-        doAsync {
-            StoreApplication.database.storeDao().updateStore(storeEntity)
-            uiThread {
-                updateStore(storeEntity)
-            }
-        }
+        mMainViewModel.updateStore(storeEntity)
     }
 
     override fun onDeleteStore(storeEntity: StoreEntity) {
@@ -131,12 +104,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_delete_title)
             .setPositiveButton(R.string.dialog_delete_confirm) { _, _ ->
-                doAsync {
-                    StoreApplication.database.storeDao().deleteStore(storeEntity)
-                    uiThread {
-                        mAdapter.delete(storeEntity)
-                    }
-                }
+                mMainViewModel.deleteStore(storeEntity)
             }
             .setNegativeButton(R.string.dialog_delete_cancel, null)
             .show()
@@ -185,6 +153,7 @@ class MainActivity : AppCompatActivity(), OnClickListener, MainAux {
     }
 
     override fun updateStore(storeEntity: StoreEntity) {
-        mAdapter.update(storeEntity)
+        TODO("Not yet implemented")
     }
+
 }

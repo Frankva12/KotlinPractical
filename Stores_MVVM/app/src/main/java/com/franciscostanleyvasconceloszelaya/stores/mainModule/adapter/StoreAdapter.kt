@@ -1,5 +1,6 @@
 package com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class StoreAdapter(
 
     override fun getItemCount(): Int = stores.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setStores(stores: List<StoreEntity>) {
         this.stores = stores as MutableList<StoreEntity>
         notifyDataSetChanged()
@@ -53,22 +55,6 @@ class StoreAdapter(
         if (!stores.contains(storeEntity)) {
             stores.add(storeEntity)
             notifyItemInserted(stores.size - 1)
-        }
-    }
-
-    fun update(storeEntity: StoreEntity) {
-        val index = stores.indexOf(storeEntity)
-        if (index != -1) {
-            stores.set(index, storeEntity)
-            notifyItemChanged(index)
-        }
-    }
-
-    fun delete(storeEntity: StoreEntity) {
-        val index = stores.indexOf(storeEntity)
-        if (index != -1) {
-            stores.removeAt(index)
-            notifyItemRemoved(index)
         }
     }
 
