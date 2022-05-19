@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -43,8 +44,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         mMainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mMainViewModel.getStores().observe(this) { stores ->
             mAdapter.setStores(stores)
+            mBinding.progressBar.visibility = if (stores.isEmpty()) View.VISIBLE else View.GONE
         }
-
 
         mEditStoreViewModel = ViewModelProvider(this)[EditStoreViewModel::class.java]
         mEditStoreViewModel.getShowFab().observe(this) { isVisible ->

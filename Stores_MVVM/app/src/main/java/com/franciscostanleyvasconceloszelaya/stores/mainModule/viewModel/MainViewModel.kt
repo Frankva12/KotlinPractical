@@ -10,14 +10,14 @@ class MainViewModel : ViewModel() {
     private var storeList: MutableList<StoreEntity> = mutableListOf()
     private val interact: MainInteract = MainInteract()
 
-    private val stores: MutableLiveData<List<StoreEntity>> by lazy {
-        MutableLiveData<List<StoreEntity>>().also {
+    private val stores: MutableLiveData<MutableList<StoreEntity>> by lazy {
+        MutableLiveData<MutableList<StoreEntity>>().also {
             loadStores()
         }
     }
 
 
-    fun getStores(): LiveData<List<StoreEntity>> {
+    fun getStores(): LiveData<MutableList<StoreEntity>> {
         return stores
     }
 
