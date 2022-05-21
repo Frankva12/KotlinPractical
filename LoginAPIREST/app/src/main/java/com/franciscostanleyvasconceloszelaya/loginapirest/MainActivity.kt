@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import com.android.volley.toolbox.JsonObjectRequest
 import com.franciscostanleyvasconceloszelaya.loginapirest.databinding.ActivityMainBinding
-import com.franciscostanleyvasconceloszelaya.stores.LoginApplication
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {

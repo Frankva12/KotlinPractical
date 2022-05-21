@@ -7,7 +7,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.franciscostanleyvasconceloszelaya.loginapirest.databinding.ActivityProfileBinding
-import com.franciscostanleyvasconceloszelaya.stores.LoginApplication
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 

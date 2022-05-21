@@ -1,7 +1,6 @@
-package com.franciscostanleyvasconceloszelaya.stores
+package com.franciscostanleyvasconceloszelaya.loginapirest
 
 import android.app.Application
-import com.franciscostanleyvasconceloszelaya.stores.common.database.ReqResAPI
 
 class LoginApplication : Application() {
     companion object {

@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgProfile"
-        tools:text="nombre completo" />
+        tools:text="Full name" />
 
     <TextView
         android:id="@+id/tvEmail"
