@@ -5,13 +5,13 @@ import com.franciscostanleyvasconceloszelaya.stores.common.database.ReqResAPI
 
 class LoginApplication : Application() {
     companion object {
-        lateinit var storesAPI: ReqResAPI
+        lateinit var reqResAPI: ReqResAPI
     }
 
     override fun onCreate() {
         super.onCreate()
 
         //Volley
-        storesAPI = ReqResAPI.getInstance(this)
+        reqResAPI = ReqResAPI.getInstance(this)
     }
 }
