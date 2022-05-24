@@ -3,9 +3,10 @@ package com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
-import com.franciscostanleyvasconceloszelaya.stores.common.utils.Constants
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteract
+import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
     private var storeList: MutableList<StoreEntity> = mutableListOf()
@@ -51,13 +52,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun updateStore(storeEntity: StoreEntity) {
-        storeEntity.isFavorite = !storeEntity.isFavorite
-        interact.updateStore(storeEntity) {
-            val index = storeList.indexOf(storeEntity)
-            if (index != -1) {
-                storeList[index] = storeEntity
-                //stores.value = storeList
-            }
+        viewModelScope.launch {
+            storeEntity.isFavorite = !storeEntity.isFavorite
+            interact.updateStore(storeEntity)
         }
     }
 }

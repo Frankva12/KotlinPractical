@@ -22,12 +22,12 @@ class EditStoreInteract {
         }
     }
 
-    fun updateStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {
-        doAsync {
+    /*fun updateStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {
+        *//*doAsync {
             StoreApplication.database.storeDao().updateStore(storeEntity)
             uiThread {
                 callback(storeEntity)
             }
-        }
-    }
+        }*//*
+    }*/
 }

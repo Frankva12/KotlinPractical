@@ -5,6 +5,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
+import kotlinx.coroutines.delay
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -53,7 +54,7 @@ class MainInteract {
 */
 
     val stores: LiveData<MutableList<StoreEntity>> = liveData {
-        kotlinx.coroutines.delay(1_000)//temp for testing
+        delay(1_000)//temp for testing
         val storesLiveData = StoreApplication.database.storeDao().getAllStores()
 
         emitSource(storesLiveData.map { stores ->
@@ -70,12 +71,8 @@ class MainInteract {
         }
     }
 
-    fun updateStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {
-        doAsync {
-            StoreApplication.database.storeDao().updateStore(storeEntity)
-            uiThread {
-                callback(storeEntity)
-            }
-        }
+    suspend fun updateStore(storeEntity: StoreEntity) {
+        delay(300)
+        StoreApplication.database.storeDao().updateStore(storeEntity)
     }
 }
