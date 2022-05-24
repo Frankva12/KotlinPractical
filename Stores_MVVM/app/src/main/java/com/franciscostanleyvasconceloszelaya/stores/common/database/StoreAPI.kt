@@ -15,7 +15,7 @@ class StoreAPI constructor(context: Context) {
         }
     }
 
-    val requestQueue: RequestQueue by lazy {
+    private val requestQueue: RequestQueue by lazy {
         Volley.newRequestQueue(context.applicationContext)
     }
 

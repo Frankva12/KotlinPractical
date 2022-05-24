@@ -7,18 +7,18 @@ import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.editModule.model.EditStoreInteract
 
 class EditStoreViewModel : ViewModel() {
-    private val storeSelected = MutableLiveData<StoreEntity>()
     private val showFab = MutableLiveData<Boolean>()
     private val result = MutableLiveData<Any>()
+    private var storeId: Long = 0
 
     private val interact: EditStoreInteract = EditStoreInteract()
 
     fun setStoreSelected(storeEntity: StoreEntity) {
-        storeSelected.value = storeEntity
+        storeId = storeEntity.id
     }
 
     fun getStoreSelected(): LiveData<StoreEntity> {
-        return storeSelected
+        return interact.getStoreById(storeId)
     }
 
     fun setShowFab(isVisible: Boolean) {
