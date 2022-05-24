@@ -1,19 +1,15 @@
 package com.franciscostanleyvasconceloszelaya.stores.mainModule.model
 
-import android.util.Log
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
-import com.franciscostanleyvasconceloszelaya.stores.common.utils.Constants
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class MainInteract {
 
-    fun getStores(callback: (MutableList<StoreEntity>) -> Unit) {
+    /*fun getStoresFireBase(callback: (MutableList<StoreEntity>) -> Unit) {
         val url = Constants.STORES_URL + Constants.GET_ALL_PATH
 
         var storeList = mutableListOf<StoreEntity>()
@@ -41,9 +37,9 @@ class MainInteract {
         })
 
         StoreApplication.storesAPI.addToRequestQueue(jsonObjectRequest)
-    }
+    }*/
 
-    fun getStoresRoom(callback: (MutableList<StoreEntity>) -> Unit) {
+    /*fun getStores(callback: (MutableList<StoreEntity>) -> Unit) {
         doAsync {
             val storeList = StoreApplication.database.storeDao().getAllStores()
             uiThread {
@@ -52,6 +48,12 @@ class MainInteract {
                 callback(storeList)
             }
         }
+    }
+*/
+
+    val stores: LiveData<MutableList<StoreEntity>> = liveData {
+        val storesLiveData = StoreApplication.database.storeDao().getAllStores()
+        emitSource(storesLiveData)
     }
 
     fun deleteStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {

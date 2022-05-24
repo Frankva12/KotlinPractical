@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lenovo15/ONE-DRIVE/Documentos/KotlinPractical/LoginAPIREST/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
+        <entry key="..\:/Users/Lenovo15/ONE-DRIVE/Documentos/KotlinPractical/LoginAPIREST/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.124" />
         <entry key="..\:/Users/Lenovo15/ONE-DRIVE/Documentos/KotlinPractical/LoginAPIREST/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Lenovo15/ONE-DRIVE/Documentos/KotlinPractical/LoginAPIREST/app/src/main/res/layout/activity_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Lenovo15/ONE-DRIVE/Documentos/KotlinPractical/LoginAPIREST/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.124" />
       </map>
     </option>
   </component>
