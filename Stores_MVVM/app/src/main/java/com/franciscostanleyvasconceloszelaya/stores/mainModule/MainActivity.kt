@@ -15,7 +15,6 @@ import com.franciscostanleyvasconceloszelaya.stores.databinding.ActivityMainBind
 import com.franciscostanleyvasconceloszelaya.stores.editModule.EditStoreFragment
 import com.franciscostanleyvasconceloszelaya.stores.editModule.viewModel.EditStoreViewModel
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.OnClickListener
-import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreAdapter
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreListAdapter
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -44,6 +43,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     private fun setUpViewModel() {
         mMainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mMainViewModel.getStores().observe(this) { stores ->
+            mBinding.progressBar.visibility = View.GONE
             mAdapter.submitList(stores)
         }
         mMainViewModel.isShowProgress().observe(this) { isShowProgress ->

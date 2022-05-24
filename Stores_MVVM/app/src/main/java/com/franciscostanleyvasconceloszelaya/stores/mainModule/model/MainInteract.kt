@@ -2,6 +2,7 @@ package com.franciscostanleyvasconceloszelaya.stores.mainModule.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import org.jetbrains.anko.doAsync
@@ -52,8 +53,12 @@ class MainInteract {
 */
 
     val stores: LiveData<MutableList<StoreEntity>> = liveData {
+        kotlinx.coroutines.delay(1_000)//temp for testing
         val storesLiveData = StoreApplication.database.storeDao().getAllStores()
-        emitSource(storesLiveData)
+
+        emitSource(storesLiveData.map { stores ->
+            stores.sortedBy { it.name }.toMutableList()
+        })
     }
 
     fun deleteStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {
