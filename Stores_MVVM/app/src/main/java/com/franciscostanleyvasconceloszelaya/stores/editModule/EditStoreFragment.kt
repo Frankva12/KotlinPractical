@@ -72,7 +72,7 @@ class EditStoreFragment : Fragment() {
             hideKeyBoard()
             when (result) {
                 is Long -> {
-                    mStoreEntity.id = result
+                    mStoreEntity.id = mStoreEntity.id
                     mEditStoreViewModel.setStoreSelected(mStoreEntity)
                     Toast.makeText(
                         mActivity,

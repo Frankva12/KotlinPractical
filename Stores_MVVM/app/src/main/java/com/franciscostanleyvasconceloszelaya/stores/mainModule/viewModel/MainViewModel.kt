@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.Constants
+import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteract
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class MainViewModel : ViewModel() {
 
     private val showProgress: MutableLiveData<Boolean> = MutableLiveData()
 
+    private val typeError: MutableLiveData<TypeError> = MutableLiveData()
 
     /*private val stores: MutableLiveData<MutableList<StoreEntity>> by lazy {
         MutableLiveData<MutableList<StoreEntity>>().also {
@@ -30,6 +32,8 @@ class MainViewModel : ViewModel() {
     fun getStores(): LiveData<MutableList<StoreEntity>> {
         return stores
     }
+
+    fun getTypeError() : MutableLiveData<TypeError> = typeError
 
     fun isShowProgress(): LiveData<Boolean> {
         return showProgress
@@ -66,4 +70,5 @@ class MainViewModel : ViewModel() {
             }
         }
     }
+
 }

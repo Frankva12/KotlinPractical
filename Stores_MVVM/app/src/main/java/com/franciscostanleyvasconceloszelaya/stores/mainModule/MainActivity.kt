@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.franciscostanleyvasconceloszelaya.stores.*
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
+import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
 import com.franciscostanleyvasconceloszelaya.stores.databinding.ActivityMainBinding
 import com.franciscostanleyvasconceloszelaya.stores.editModule.EditStoreFragment
 import com.franciscostanleyvasconceloszelaya.stores.editModule.viewModel.EditStoreViewModel
@@ -18,6 +19,7 @@ import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.OnClickLi
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.adapter.StoreListAdapter
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.viewModel.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
@@ -48,6 +50,15 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         }
         mMainViewModel.isShowProgress().observe(this) { isShowProgress ->
             mBinding.progressBar.visibility = if (isShowProgress) View.VISIBLE else View.GONE
+        }
+        mMainViewModel.getTypeError().observe(this) { typeError ->
+            val msgRes = when (typeError) {
+                TypeError.GET -> "Consult error"
+                TypeError.INSERT -> "Insert error"
+                TypeError.DELETE -> "Delete error"
+                else -> "Unknown error"
+            }
+            Snackbar.make(mBinding.root, msgRes, Snackbar.LENGTH_SHORT).show()
         }
 
         mEditStoreViewModel = ViewModelProvider(this)[EditStoreViewModel::class.java]
