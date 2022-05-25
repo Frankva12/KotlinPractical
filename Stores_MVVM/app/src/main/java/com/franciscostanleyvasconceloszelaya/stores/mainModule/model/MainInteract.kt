@@ -6,8 +6,6 @@ import androidx.lifecycle.map
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import kotlinx.coroutines.delay
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainInteract {
 
@@ -62,13 +60,9 @@ class MainInteract {
         })
     }
 
-    fun deleteStore(storeEntity: StoreEntity, callback: (StoreEntity) -> Unit) {
-        doAsync {
-            StoreApplication.database.storeDao().deleteStore(storeEntity)
-            uiThread {
-                callback(storeEntity)
-            }
-        }
+    suspend fun deleteStore(storeEntity: StoreEntity) {
+        delay(1_500)
+        StoreApplication.database.storeDao().deleteStore(storeEntity)
     }
 
     suspend fun updateStore(storeEntity: StoreEntity) {
