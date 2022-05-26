@@ -16,7 +16,6 @@ class EditStoreViewModel : ViewModel() {
     private val result = MutableLiveData<Any>()
     private var storeId: Long = 0
 
-
     private val typeError: MutableLiveData<TypeError> = MutableLiveData()
 
     private val interact: EditStoreInteract = EditStoreInteract()
@@ -24,6 +23,8 @@ class EditStoreViewModel : ViewModel() {
     fun setStoreSelected(storeEntity: StoreEntity) {
         storeId = storeEntity.id
     }
+
+    fun getTypeError(): MutableLiveData<TypeError> = typeError
 
     fun getStoreSelected(): LiveData<StoreEntity> {
         return interact.getStoreById(storeId)
