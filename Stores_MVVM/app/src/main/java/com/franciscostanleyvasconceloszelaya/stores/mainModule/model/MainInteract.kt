@@ -22,13 +22,11 @@ class MainInteract {
     }
 
     suspend fun deleteStore(storeEntity: StoreEntity) = withContext(Dispatchers.IO){
-        delay(1_000)
         val result = StoreApplication.database.storeDao().deleteStore(storeEntity)
         if (result == 0) throw StoresException(typeError = TypeError.DELETE)
     }
 
     suspend fun updateStore(storeEntity: StoreEntity) = withContext(Dispatchers.IO) {
-        delay(300)
         val result = StoreApplication.database.storeDao().updateStore(storeEntity)
         if (result == 0) throw StoresException(typeError = TypeError.UPDATE)
     }
