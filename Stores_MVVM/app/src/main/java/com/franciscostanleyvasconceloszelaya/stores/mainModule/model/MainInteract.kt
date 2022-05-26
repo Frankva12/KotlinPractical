@@ -7,7 +7,9 @@ import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.StoresException
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class MainInteract {
 
@@ -62,13 +64,13 @@ class MainInteract {
         })
     }
 
-    suspend fun deleteStore(storeEntity: StoreEntity) {
+    suspend fun deleteStore(storeEntity: StoreEntity) = withContext(Dispatchers.IO){
         delay(1_500)
         val result = StoreApplication.database.storeDao().deleteStore(storeEntity)
         if (result == 0) throw StoresException(typeError = TypeError.DELETE)
     }
 
-    suspend fun updateStore(storeEntity: StoreEntity) {
+    suspend fun updateStore(storeEntity: StoreEntity) = withContext(Dispatchers.IO) {
         delay(300)
         val result = StoreApplication.database.storeDao().updateStore(storeEntity)
         if (result == 0) throw StoresException(typeError = TypeError.UPDATE)

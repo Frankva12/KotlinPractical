@@ -11,21 +11,11 @@ import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteract
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class MainViewModel : ViewModel() {
     private val interact: MainInteract = MainInteract()
-
     private val showProgress: MutableLiveData<Boolean> = MutableLiveData()
-
     private val typeError: MutableLiveData<TypeError> = MutableLiveData()
-
-    /*private val stores: MutableLiveData<MutableList<StoreEntity>> by lazy {
-        MutableLiveData<MutableList<StoreEntity>>().also {
-            loadStores()
-        }
-    }*/
-
     private val stores = interact.stores
 
 
@@ -38,15 +28,6 @@ class MainViewModel : ViewModel() {
     fun isShowProgress(): LiveData<Boolean> {
         return showProgress
     }
-
-    /*private fun loadStores() {
-        showProgress.value = Constants.SHOW
-        interact.getStores {
-            showProgress.value = Constants.HIDE
-            stores.value = it
-            storeList = it
-        }
-    }*/
 
     fun deleteStore(storeEntity: StoreEntity) {
         executeAction { interact.deleteStore(storeEntity) }
