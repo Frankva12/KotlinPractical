@@ -157,5 +157,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             Toast.makeText(this, R.string.main_error_no_resolve, Toast.LENGTH_LONG).show()
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        mEditStoreViewModel.setShowFab(true)
+    }
 }

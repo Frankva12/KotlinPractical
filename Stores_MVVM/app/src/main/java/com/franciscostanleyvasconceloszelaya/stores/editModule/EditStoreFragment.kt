@@ -107,9 +107,9 @@ class EditStoreFragment : Fragment() {
         mActivity = activity as? MainActivity
         mActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mActivity?.supportActionBar?.title = if (mIsEditMode) {
-            getString(R.string.edit_store_title_add)
-        } else {
             getString(R.string.edit_store_title_edit)
+        } else {
+            getString(R.string.edit_store_title_add)
         }
 
         setHasOptionsMenu(true)
@@ -215,7 +215,6 @@ class EditStoreFragment : Fragment() {
     override fun onDestroy() {
         mActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         mActivity?.supportActionBar?.title = getString(R.string.app_name)
-        mEditStoreViewModel.setShowFab(true)
         mEditStoreViewModel.setResult(Any())
         mEditStoreViewModel.setTypeError(TypeError.NONE)
 
