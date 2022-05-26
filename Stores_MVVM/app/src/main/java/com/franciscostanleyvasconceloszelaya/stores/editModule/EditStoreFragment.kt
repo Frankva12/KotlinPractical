@@ -87,14 +87,19 @@ class EditStoreFragment : Fragment() {
             }
         }
         mEditStoreViewModel.getTypeError().observe(viewLifecycleOwner) { typeError ->
-            val msgRes = when (typeError) {
-                TypeError.GET -> R.string.main_error_get
-                TypeError.INSERT -> R.string.main_error_insert
-                TypeError.UPDATE -> R.string.main_error_update
-                TypeError.DELETE -> R.string.main_error_delete
-                else -> R.string.main_error_unknown
+            if (typeError != TypeError.NONE) {
+
+                val msgRes = when (typeError) {
+                    TypeError.GET -> R.string.main_error_get
+                    TypeError.INSERT -> R.string.main_error_insert
+                    TypeError.INSERT_NAME -> R.string.main_error_insert_name
+                    TypeError.UPDATE -> R.string.main_error_update
+                    TypeError.UPDATE_NAME -> R.string.main_error_update_name
+                    TypeError.DELETE -> R.string.main_error_delete
+                    else -> R.string.main_error_unknown
+                }
+                Snackbar.make(mBinding.root, msgRes, Snackbar.LENGTH_SHORT).show()
             }
-            Snackbar.make(mBinding.root, msgRes, Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -212,6 +217,7 @@ class EditStoreFragment : Fragment() {
         mActivity?.supportActionBar?.title = getString(R.string.app_name)
         mEditStoreViewModel.setShowFab(true)
         mEditStoreViewModel.setResult(Any())
+        mEditStoreViewModel.setTypeError(TypeError.NONE)
 
         setHasOptionsMenu(false)
         super.onDestroy()

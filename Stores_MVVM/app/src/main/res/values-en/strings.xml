@@ -25,7 +25,9 @@
     <string name="item_option_dialog_go_to_website">Go to Website</string>
     <string name="main_error_get">Consult error</string>
     <string name="main_error_insert">Insert error</string>
+    <string name="main_error_insert_name">Insert error (can\'t be the same name of another store)</string>
     <string name="main_error_update">Update error</string>
+    <string name="main_error_update_name">Update error (can\'t be the same name of another store)</string>
     <string name="main_error_delete">Delete error</string>
     <string name="main_error_unknown">Unknown error</string>
 </resources>
