@@ -53,10 +53,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         }
         mMainViewModel.getTypeError().observe(this) { typeError ->
             val msgRes = when (typeError) {
-                TypeError.GET -> "Consult error"
-                TypeError.INSERT -> "Insert error"
-                TypeError.DELETE -> "Delete error"
-                else -> "Unknown error"
+                TypeError.GET -> R.string.main_error_get
+                TypeError.INSERT -> R.string.main_error_insert
+                TypeError.UPDATE -> R.string.main_error_update
+                TypeError.DELETE -> R.string.main_error_delete
+                else -> R.string.main_error_unknown
             }
             Snackbar.make(mBinding.root, msgRes, Snackbar.LENGTH_SHORT).show()
         }

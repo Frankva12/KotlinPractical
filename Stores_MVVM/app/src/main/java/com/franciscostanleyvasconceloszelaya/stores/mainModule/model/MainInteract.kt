@@ -5,6 +5,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.franciscostanleyvasconceloszelaya.stores.StoreApplication
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
+import com.franciscostanleyvasconceloszelaya.stores.common.utils.StoresException
+import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
 import kotlinx.coroutines.delay
 
 class MainInteract {
@@ -62,11 +64,13 @@ class MainInteract {
 
     suspend fun deleteStore(storeEntity: StoreEntity) {
         delay(1_500)
-        StoreApplication.database.storeDao().deleteStore(storeEntity)
+        val result = StoreApplication.database.storeDao().deleteStore(storeEntity)
+        if (result == 0) throw StoresException(typeError = TypeError.DELETE)
     }
 
     suspend fun updateStore(storeEntity: StoreEntity) {
         delay(300)
-        StoreApplication.database.storeDao().updateStore(storeEntity)
+        val result = StoreApplication.database.storeDao().updateStore(storeEntity)
+        if (result == 0) throw StoresException(typeError = TypeError.UPDATE)
     }
 }

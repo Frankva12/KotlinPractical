@@ -23,4 +23,9 @@
     <string name="item_option_dialog_delete">Borrar</string>
     <string name="item_option_dialog_call">Llamar</string>
     <string name="item_option_dialog_go_to_website">Ir al sitio web</string>
+    <string name="main_error_get">Error en consulta</string>
+    <string name="main_error_insert">Error en crear</string>
+    <string name="main_error_update">Error en actualizar</string>
+    <string name="main_error_delete">Error en borrar</string>
+    <string name="main_error_unknown">Error desconocido</string>
 </resources>

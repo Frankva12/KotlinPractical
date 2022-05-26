@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.franciscostanleyvasconceloszelaya.stores.common.entities.StoreEntity
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.Constants
+import com.franciscostanleyvasconceloszelaya.stores.common.utils.StoresException
 import com.franciscostanleyvasconceloszelaya.stores.common.utils.TypeError
 import com.franciscostanleyvasconceloszelaya.stores.mainModule.model.MainInteract
 import kotlinx.coroutines.Job
@@ -13,7 +14,6 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class MainViewModel : ViewModel() {
-    private var storeList: MutableList<StoreEntity> = mutableListOf()
     private val interact: MainInteract = MainInteract()
 
     private val showProgress: MutableLiveData<Boolean> = MutableLiveData()
@@ -33,7 +33,7 @@ class MainViewModel : ViewModel() {
         return stores
     }
 
-    fun getTypeError() : MutableLiveData<TypeError> = typeError
+    fun getTypeError(): MutableLiveData<TypeError> = typeError
 
     fun isShowProgress(): LiveData<Boolean> {
         return showProgress
@@ -63,8 +63,8 @@ class MainViewModel : ViewModel() {
             showProgress.value = Constants.SHOW
             try {
                 block()
-            } catch (e: Exception) {
-                e.printStackTrace()
+            } catch (e: StoresException) {
+                typeError.value = e.typeError
             } finally {
                 showProgress.value = Constants.HIDE
             }
