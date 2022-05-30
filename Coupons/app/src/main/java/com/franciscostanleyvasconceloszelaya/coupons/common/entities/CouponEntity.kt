@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.coupons
+package com.franciscostanleyvasconceloszelaya.coupons.common.entities
 
 import androidx.room.Entity
 import androidx.room.Index

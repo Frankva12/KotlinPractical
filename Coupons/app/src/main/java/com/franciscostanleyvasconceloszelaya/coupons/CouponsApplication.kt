@@ -2,6 +2,7 @@ package com.franciscostanleyvasconceloszelaya.coupons
 
 import android.app.Application
 import androidx.room.Room
+import com.franciscostanleyvasconceloszelaya.coupons.common.dataAccess.CouponDatabase
 
 class CouponsApplication : Application() {
     companion object {

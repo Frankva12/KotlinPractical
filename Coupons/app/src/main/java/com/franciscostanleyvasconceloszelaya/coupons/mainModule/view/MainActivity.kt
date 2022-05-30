@@ -1,8 +1,8 @@
-package com.franciscostanleyvasconceloszelaya.coupons
+package com.franciscostanleyvasconceloszelaya.coupons.mainModule.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.franciscostanleyvasconceloszelaya.coupons.databinding.ActivityMainBinding
+import com.franciscostanleyvasconceloszelaya.coupons.R
 
 class MainActivity : AppCompatActivity() {
 
