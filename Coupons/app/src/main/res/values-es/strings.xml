@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cupones</string>
+    <string name="main_button_consult">Consultar</string>
+    <string name="main_button_create">Crear coupon</string>
+    <string name="main_text_title">Bienvenido, ingrese su cupón y a continuación presione en consultar</string>
+    <string name="main_hint_coupon">cupón</string>
+    <string name="main_hint_description">descripcion</string>
+    <string name="error_unique_code">El cupón ya existe, por favor introduce otro codigo.</string>
+    <string name="error_invalid_length">El cupón debe consistir de 5 a 10 caracteres.</string>
+    <string name="error_unknown">Error desconocido al crear cupón</string>
+    <string name="main_save_success">Cupón creado</string>
+    <string name="main_hint_active">cupón activo</string>
+</resources>
