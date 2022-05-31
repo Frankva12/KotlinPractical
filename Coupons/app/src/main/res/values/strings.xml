@@ -8,4 +8,6 @@
     <string name="error_unique_code">Unknown error in create coupon.</string>
     <string name="error_invalid_length">The coupon have to consists of 5 to 10 characters.</string>
     <string name="error_unknown">Unknown error in create code</string>
+    <string name="main_save_success">Created coupon</string>
+    <string name="main_hint_active">active coupon</string>
 </resources>
