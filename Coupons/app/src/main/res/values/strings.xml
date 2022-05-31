@@ -5,4 +5,7 @@
     <string name="main_text_title">Welcome, enter your coupon and press consult</string>
     <string name="main_hint_coupon">coupon</string>
     <string name="main_hint_description">description</string>
+    <string name="error_unique_code">Unknown error in create coupon.</string>
+    <string name="error_invalid_length">The coupon have to consists of 5 to 10 characters.</string>
+    <string name="error_unknown">Unknown error in create code</string>
 </resources>
