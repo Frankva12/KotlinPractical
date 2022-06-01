@@ -63,4 +63,33 @@ class MainActivityCreateTest {
         val btnCreate = onView(withId(R.id.btnCreate))
         btnCreate.check(matches(not(isDisplayed())))// ! = not()
     }
+
+    /*
+    * Comprueba que no se puede crear un cupon con codigo repetido.
+    * Test: etCoupon inicia vacio, y se reemplaza texto con "WELCOME_01A (cupon existente)"
+    * Click en btnConsult
+    * Corrobora que btnCreate existe.
+    * Añade descripcion y edita etCoupon(por un codigo existente, ej: WELCOME_01)
+    * Click en btnCreate
+    * Comprueba el mensaje de sanckbar(The coupon already exists, use another code).*/
+    @Test
+    fun createCouponWithOldCodeTest(){
+        val etCoupon = onView(withId(R.id.etCoupon))
+        etCoupon.perform(replaceText("WELCOME_01A"))
+
+        val btnConsult = onView(withId(R.id.btnConsult))
+        btnConsult.perform(click())
+
+        val btnCreate = onView(withId(R.id.btnCreate))
+        btnCreate.check(matches(isDisplayed()))
+
+        val etDescription = onView(withId(R.id.etDescription))
+        etDescription.perform(replaceText("3x2 enn chocolates"))
+        etCoupon.perform(replaceText("WELCOME_01"))
+
+        btnCreate.perform(click())
+
+        val snackbar = onView(withId(com.google.android.material.R.id.snackbar_text))
+        snackbar.check(matches(withText("The coupon already exists, use another code")))
+    }
 }
