@@ -6,6 +6,7 @@
     <string name="main_type_register">Register</string>
     <string name="main_type_login">Login</string>
     <string name="main_error_server">Petition error</string>
+    <string name="main_error_response">Error in the response</string>
     <string name="description_img_profile">Profile image</string>
     <string name="main_profile">Profile</string>
 </resources>

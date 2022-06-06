@@ -53,8 +53,18 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<LoginResponse>, response: Response<LoginResponse>
                 ) {
-                    val result = response.body()
-                    updateUI("${Constants.TOKEN_PROPERTY}: ${result?.token}")
+                    when (response.code()) {
+                        200 -> {
+                            val result = response.body()
+                            updateUI("${Constants.TOKEN_PROPERTY}: ${result?.token}")
+                        }
+                        400 -> {
+                            updateUI(getString(R.string.main_error_server))
+                        }
+                        else -> {
+                            updateUI(getString(R.string.main_error_response))
+                        }
+                    }
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
