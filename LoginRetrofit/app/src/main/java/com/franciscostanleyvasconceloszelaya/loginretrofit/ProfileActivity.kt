@@ -3,7 +3,6 @@ package com.franciscostanleyvasconceloszelaya.loginretrofit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.android.volley.toolbox.JsonObjectRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.franciscostanleyvasconceloszelaya.loginretrofit.databinding.ActivityProfileBinding
@@ -27,7 +26,7 @@ class ProfileActivity : AppCompatActivity() {
         val url =
             Constants.BASE_URL + Constants.API_PATH + Constants.USERS_PATH + Constants.TWO_PATH
 
-        val jsonObjectRequest =
+        /*val jsonObjectRequest =
             object : JsonObjectRequest(Method.GET, url, null, { response ->
                 Log.i("response", response.toString())
 
@@ -53,7 +52,7 @@ class ProfileActivity : AppCompatActivity() {
                     return params
                 }
             }
-        LoginApplication.reqResAPI.addToRequestQueue(jsonObjectRequest)
+        LoginApplication.reqResAPI.addToRequestQueue(jsonObjectRequest)*/
     }
 
     private fun showMessage(message: String) {

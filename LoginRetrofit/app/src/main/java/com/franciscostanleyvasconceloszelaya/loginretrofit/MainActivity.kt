@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.android.volley.toolbox.JsonObjectRequest
 import com.franciscostanleyvasconceloszelaya.loginretrofit.databinding.ActivityMainBinding
 import org.json.JSONObject
 
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             jsonParams.put(Constants.PASSWORD_PARAM, password)
         }
 
-        val jsonObjectRequest =
+        /*val jsonObjectRequest =
             object : JsonObjectRequest(Method.POST, url, jsonParams, { response ->
                 Log.i("response", response.toString())
 
@@ -75,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                     return params
                 }
             }
-        LoginApplication.reqResAPI.addToRequestQueue(jsonObjectRequest)
+        LoginApplication.reqResAPI.addToRequestQueue(jsonObjectRequest)*/
     }
 
     private fun updateUI(result: String) {
