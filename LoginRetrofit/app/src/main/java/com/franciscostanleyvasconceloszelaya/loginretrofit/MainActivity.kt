@@ -11,10 +11,7 @@ import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.LoginRespons
 import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.LoginService
 import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.UserInfo
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
@@ -55,7 +52,16 @@ class MainActivity : AppCompatActivity() {
                 val result = service.loginUser(UserInfo(email, password))
                 updateUI("${Constants.TOKEN_PROPERTY}: ${result.token}")
             } catch (e: Exception) {
-                updateUI(getString(R.string.main_error_response))
+                (e as? HttpException)?.let {
+                    when (it.code()) {
+                        400 -> {
+                            updateUI(getString(R.string.main_error_server))
+                        }
+                        else -> {
+                            updateUI(getString(R.string.main_error_response))
+                        }
+                    }
+                }
             }
         }
 
