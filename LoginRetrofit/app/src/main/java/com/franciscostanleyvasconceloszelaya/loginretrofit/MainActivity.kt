@@ -6,7 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.franciscostanleyvasconceloszelaya.loginretrofit.databinding.ActivityMainBinding
-import org.json.JSONObject
+import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.LoginResponse
+import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.LoginService
+import com.franciscostanleyvasconceloszelaya.loginretrofit.retrofit.UserInfo
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,13 +40,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val typeMethod =
+        val email = mBinding.etEmail.text.toString().trim()
+        val password = mBinding.etPassword.text.toString().trim()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(LoginService::class.java)
+        service.login(UserInfo(email, password)).enqueue(
+            object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>, response: Response<LoginResponse>
+                ) {
+                    val result = response.body()
+                    updateUI("${Constants.TOKEN_PROPERTY}: ${result?.token}")
+                }
+
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.e("Retrofit", "Problems with the server.")
+                }
+            }
+        )
+
+        /*val typeMethod =
             if (mBinding.swType.isChecked) Constants.LOGIN_PATH else Constants.REGISTER_PATH
 
         val url = Constants.BASE_URL + Constants.API_PATH + typeMethod
 
-        val email = mBinding.etEmail.text.toString().trim()
-        val password = mBinding.etPassword.text.toString().trim()
 
         val jsonParams = JSONObject()
 
@@ -50,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             jsonParams.put(Constants.PASSWORD_PARAM, password)
         }
 
-        /*val jsonObjectRequest =
+        val jsonObjectRequest =
             object : JsonObjectRequest(Method.POST, url, jsonParams, { response ->
                 Log.i("response", response.toString())
 
