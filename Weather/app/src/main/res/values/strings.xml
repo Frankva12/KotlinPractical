@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="main_error_server">Server error</string>
+    <string name="main_current_weather">Current Weather:</string>
 </resources>

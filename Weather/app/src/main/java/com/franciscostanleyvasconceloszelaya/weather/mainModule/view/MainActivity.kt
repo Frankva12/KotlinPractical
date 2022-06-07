@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
-            binding.viewModel.getWeatherAndForecast(
+            binding.viewModel?.getWeatherAndForecast(
                 13.7226999,
                 -89.210953,
                 "73686b2d4952bcbe03a7a3308b84ecd5",
