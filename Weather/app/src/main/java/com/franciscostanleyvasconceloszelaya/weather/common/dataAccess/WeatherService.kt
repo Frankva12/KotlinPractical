@@ -1,6 +1,6 @@
 package com.franciscostanleyvasconceloszelaya.weather.common.dataAccess
 
-import com.franciscostanleyvasconceloszelaya.weather.common.WeatherForecastEntity
+import com.franciscostanleyvasconceloszelaya.weather.common.entities.WeatherForecastEntity
 import com.franciscostanleyvasconceloszelaya.weather.common.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query

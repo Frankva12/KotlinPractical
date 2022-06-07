@@ -1,4 +1,4 @@
-package com.franciscostanleyvasconceloszelaya.weather.common
+package com.franciscostanleyvasconceloszelaya.weather.common.entities
 
 open class WeatherBase(
     dt: Long,
