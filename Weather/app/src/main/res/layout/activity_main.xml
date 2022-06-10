@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.franciscostanleyvasconceloszelaya.weather.common.utils.CommonUtils"/>
+
+        <import type="com.franciscostanleyvasconceloszelaya.weather.common.utils.CommonUtils" />
+
         <variable
             name="viewModel"
             type="com.franciscostanleyvasconceloszelaya.weather.mainModule.viewModel.MainViewModel" />
@@ -83,7 +85,7 @@
                 android:id="@+id/tvMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.result.current.weather[0].main}"
+                android:text="@{CommonUtils.INSTANCE.getWeatherMain(viewModel.result.current.weather)}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -93,7 +95,7 @@
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.result.current.weather[0].description}"
+                android:text="@{CommonUtils.INSTANCE.getWeatherDescription(viewModel.result.current.weather)}"
                 android:textAppearance="?attr/textAppearanceCaption"
                 app:layout_constraintStart_toStartOf="@id/tvMain"
                 app:layout_constraintTop_toBottomOf="@id/tvMain"
