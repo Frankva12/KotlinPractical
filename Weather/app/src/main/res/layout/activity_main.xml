@@ -32,12 +32,12 @@
             android:id="@+id/tvCurrentTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/main_current_weather_title"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTimeZone"
-            android:text="@string/main_current_weather" />
+            app:layout_constraintTop_toBottomOf="@id/tvTimeZone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{String.valueOf(viewModel.result.current.temp)}"
+                android:text="@{@string/weather_temp(viewModel.result.current.temp)}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="?attr/colorSecondary"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
                 android:id="@+id/tvHumidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(viewModel.result.current.humidity)}"
+                android:text="@{@string/weather_humidity(viewModel.result.current.humidity)}"
                 android:textAppearance="?attr/textAppearanceOverline"
                 app:layout_constraintStart_toStartOf="@id/tvDt"
                 app:layout_constraintTop_toBottomOf="@id/tvDt"

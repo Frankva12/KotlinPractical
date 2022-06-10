@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="main_error_server">Server error</string>
-    <string name="main_current_weather">Current Weather:</string>
+    <string name="main_current_weather_title">Current Weather:</string>
+    <string name="main_forecast_weather_title">Weather Forecast:</string>
+
+
+    <string name="weather_temp">%.2f°C</string>
+    <string name="weather_dt">Hour: %s</string>
+    <string name="weather_humidity">Humidity: %d%%</string>
+    <string name="weather_pop">Pop: %.1f%%</string>
 </resources>
