@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.franciscostanleyvasconceloszelaya.weather.common.utils.CommonUtils"/>
         <variable
             name="viewModel"
             type="com.franciscostanleyvasconceloszelaya.weather.mainModule.viewModel.MainViewModel" />
@@ -63,7 +63,7 @@
                 android:id="@+id/tvDt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(viewModel.result.current.dt)}"
+                android:text="@{@string/weather_dt(CommonUtils.INSTANCE.getHour(viewModel.result.current.dt))}"
                 android:textAppearance="?attr/textAppearanceBody1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
