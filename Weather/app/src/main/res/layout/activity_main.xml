@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="com.franciscostanleyvasconceloszelaya.weather.common.utils.CommonUtils" />
-
         <variable
             name="viewModel"
             type="com.franciscostanleyvasconceloszelaya.weather.mainModule.viewModel.MainViewModel" />
@@ -47,9 +45,11 @@
             layout="@layout/item_weather"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            app:current="@{viewModel.result.current}"
+            app:isGone="@{!viewModel.isLoaded()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCurrentTitle"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCurrentTitle" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -68,11 +68,11 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_weather"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvForecastTitle"/>
+            app:layout_constraintTop_toBottomOf="@id/tvForecastTitle"
+            tools:listitem="@layout/item_weather" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:layout_width="0dp"
