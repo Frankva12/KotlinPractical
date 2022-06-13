@@ -10,6 +10,11 @@
         <variable
             name="current"
             type="com.franciscostanleyvasconceloszelaya.weather.common.entities.Current" />
+
+        <variable
+            name="forecast"
+            type="com.franciscostanleyvasconceloszelaya.weather.common.entities.Forecast" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
