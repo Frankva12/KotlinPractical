@@ -20,9 +20,10 @@ class RemoteDatabase {
         lat: Double,
         long: Double,
         appId: String,
+        exclude: String,
         units: String,
         lang: String
     ): WeatherForecastEntity = withContext(Dispatchers.IO) {
-        service.getWeatherForecastByCoordinates(lat, long, appId, units, lang)
+        service.getWeatherForecastByCoordinates(lat, long, appId, exclude, units, lang)
     }
 }

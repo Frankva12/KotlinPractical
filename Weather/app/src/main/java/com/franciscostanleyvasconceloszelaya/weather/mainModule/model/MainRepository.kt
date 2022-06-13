@@ -9,8 +9,9 @@ class MainRepository {
         lat: Double,
         long: Double,
         appId: String,
+        exclude: String,
         units: String,
         lang: String
     ): WeatherForecastEntity =
-        remoteDatabase.getWeatherForecastByCoordinates(lat, long, appId, units, lang)
+        remoteDatabase.getWeatherForecastByCoordinates(lat, long, appId, exclude, units, lang)
 }

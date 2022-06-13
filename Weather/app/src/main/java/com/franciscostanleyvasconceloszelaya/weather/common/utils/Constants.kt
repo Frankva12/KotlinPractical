@@ -7,6 +7,7 @@ object Constants {
     const val LATITUDE_PARAM = "lat"
     const val LONGITUDE_PARAM = "lon"
     const val APP_ID_PARAM = "appid"
+    const val EXCLUDE_PARAM = "exclude"
     const val UNITS_PARAM = "units"
     const val LANGUAGE_PARAM = "lang"
 }

@@ -3,7 +3,6 @@ package com.franciscostanleyvasconceloszelaya.weather.mainModule.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.DiffUtil
@@ -21,7 +20,7 @@ class ForecastAdapter(private val listener: OnClickListener) :
 
         fun setListener(forecast: Forecast) {
             binding?.root?.setOnClickListener {
-
+                listener.onClick(forecast)
             }
         }
     }

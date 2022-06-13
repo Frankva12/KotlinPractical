@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 13.7226999,
                 -89.210953,
                 "73686b2d4952bcbe03a7a3308b84ecd5",
+                "daily",
                 "metric",
                 "en"
             )

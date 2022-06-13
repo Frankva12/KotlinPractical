@@ -9,4 +9,5 @@
     <string name="weather_dt">Hour: %s</string>
     <string name="weather_humidity">Humidity: %d%%</string>
     <string name="weather_pop">Pop: %.1f%%</string>
+    <string name="main_error_empty_forecast">Not available Forecast</string>
 </resources>
